@@ -12,14 +12,82 @@ All analyses were performed in R. The complete analytical pipeline used to run t
 
 </br>
 
-## Analytical scripts
+## Analytical pileline
 
-The following analytical scripts are available:
+```
+# ======== EXTRACT PHENOTYPE DATA =============
+hours="4"; task="extractPheno"; array="1" #=> DONE
+submitJob $task $hours
+```
 
-1) [functions.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/functions.R): Script including all derived functions used to perform the analyses
-2) [litSearch.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/litSearch.R): Script to conduct the systematic literature research in R 
-3) [runMeta.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/runMeta.R): Script to process the extracted [data](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/tree/main/data) and perform meta-analyses on rates and predictors of CAPS
-4) [createTable.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/createTable.R): Script to generate [supplementary tables](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/tree/main/results/tables/)
+```
+# ======== PROCESS PHENOTYPE DATA =============
+hours="2"; task="processPheno"; array="1" #=> DONE
+submitJob $task $hours
+
+# ======== GENERATE PRINCIPAL COMPONENTS ======
+hours="24"; task="pca"; array="1" #=> DONE
+submitJob $task $hours
+
+# ======= COMPARE WITH PARTICIPATION ==========
+hours="10"; task="comparePB"; array="1-3" #=> DONE
+submitJob $task $hours
+
+# ======= RUN REGENIE =========================
+# step 1
+hours="23"; task="gwaS1"; array="1"; run="pca" #=> DONE
+submitJob $task $hours
+
+# step 2
+hours="23"; task="gwaS2"; array="1-22"; run="pca" #=> DONE
+submitJob $task $hours
+
+# process REGENIE
+hours="2"; task="processREGENIE"; array="1"; run="pca" #=> DONE
+submitJob $task $hours
+
+# ============ Prepare LD scores for Jacknife ==============
+# prepare for jacknife (do only once)
+hours="2"; task="JKldsc"; array="1" #=> DONE
+submitJob $task $hours 
+
+# ============== LD SCORE REGRESSION ==================
+# run ldsc regression on the PCs
+hours="6"; task="rg"; array="1" #=> DONE
+submitJob $task $hours
+
+# ============ Mendelian Randomization ==================
+# run MR on the PCs
+hours="6"; task="runMR"; array="1"  #=> DONE
+submitJob $task $hours 
+
+
+# ======= GWA on error-corrected phenotypes =============
+# step 1 (requires data generated from 'processPheno')
+hours="23"; task="gwaS1"; array="1"; run="gwaCor" #=> DONE
+submitJob $task $hours
+
+# step 2
+hours="47"; task="gwaS2"; array="1-22"; run="gwaCor" #=> done
+submitJob $task $hours
+
+# process REGENIE
+numPheno=$(wc -l "$HOME/data/gwas/gwaCorr")
+$numPheno
+hours="2"; task="processREGENIE"; array="1-23"; run="gwaCorr" #=> done
+submitJob $task $hours #=> running
+
+# get Jacknife estimates
+numPheno=$(wc -l "$HOME/data/gwas/gwaCorr") #=> running
+$numPheno
+hours="20"; task="JK"; array="1-23"
+submitJob $task $hours
+
+# upload ldsc files
+hours="2"; task="processREGENIE"; array="1"; run="upload"
+submitJob $task $hours
+
+```
 
 
 </br>
