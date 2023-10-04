@@ -12,22 +12,27 @@ All analyses were performed in R. The complete analytical pipeline used to run t
 
 </br>
 
-## Analytical pileline
+## Analytical pipeline
+
+### Extract and recode phenotype data
+
+- [extractPheno.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/extractPheno.R)
+
+
+### Process phenotype data
+
+- [processPheno.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/processPheno.R)
+- Script to prepare repeated measure data
+- Generates the reporting error scores
+
+
+### Perform principal component analysis on the reporting error scores
+- [pca.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/pca.R)
+- 
+
 
 ```
-# ======== EXTRACT PHENOTYPE DATA =============
-hours="4"; task="extractPheno"; array="1" #=> DONE
-submitJob $task $hours
-```
 
-```
-# ======== PROCESS PHENOTYPE DATA =============
-hours="2"; task="processPheno"; array="1" #=> DONE
-submitJob $task $hours
-
-# ======== GENERATE PRINCIPAL COMPONENTS ======
-hours="24"; task="pca"; array="1" #=> DONE
-submitJob $task $hours
 
 # ======= COMPARE WITH PARTICIPATION ==========
 hours="10"; task="comparePB"; array="1-3" #=> DONE
