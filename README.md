@@ -81,23 +81,16 @@ $myprog \
 ```
 
 
+### LD Score Regression and Mendelian Randomization
+
+Prepare LD scores for Jacknife
+
+- Perform GWA and process the results using [munge.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/munge.R)
+- Parameter to specify: `task = JKldsc`
 
 ```
 
 
-
-# ======= RUN REGENIE =========================
-# step 1
-hours="23"; task="gwaS1"; array="1"; run="pca" #=> DONE
-submitJob $task $hours
-
-# step 2
-hours="23"; task="gwaS2"; array="1-22"; run="pca" #=> DONE
-submitJob $task $hours
-
-# process REGENIE
-hours="2"; task="processREGENIE"; array="1"; run="pca" #=> DONE
-submitJob $task $hours
 
 # ============ Prepare LD scores for Jacknife ==============
 # prepare for jacknife (do only once)
