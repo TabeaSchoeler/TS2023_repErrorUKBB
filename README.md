@@ -6,8 +6,8 @@
 
 # Overview
 
-All analyses were performed in R. The complete analytical pipeline used to run the analyses is included in the script
-[analysis.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/litSearch.R).
+The complete analytical pipeline used to run the analyses is included in the script
+[UKBBmeasurement.sh](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/UKBBmeasurement.sh).
 
 
 </br>
