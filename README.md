@@ -102,28 +102,3 @@ $myprog \
 
 
 
-
-
-</br>
-
-## Results
-
-This repository includes the following files:
-
--   [Data pre-processing](#data-pre-processing)
-
-
-</br></br>
-
-
-### Data pre-processing
-
-</br>
-
-#### Figure 1. Number of included studies and study participants per study design, according to year of publication
-
-<img src="results/figures/Figure1.png" alt="A caption" width="50%" />
-
-
-
-
