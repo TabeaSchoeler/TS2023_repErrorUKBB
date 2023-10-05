@@ -1,36 +1,6 @@
 ##############################################################################
-# ============================== UKBB weighting ==============================
+# ======================== UKBB reporting error ==============================
 ##############################################################################
-
-# filzilla
-# sftp://hpc1-login.chuv.ch
-# name: ta6000
-# port: 22
-
-# ======= Define Home directory ==============
-srun -n 1 --pty --account=sgg --partition=sgg /bin/bash
-HOME="/data/sgg3/tabea/TS2022_UKBBmeasurement"
-source $HOME/analysis/functions.sh
-squeue
-squeue -u ta6000
-scancel 1331548
-
-
-# Delete all files in output folder (but keep directories)
-# find $HOME/output/ -type f -delete
-
-
-# ====== Start R ==============================
-alias R='$HOME/programs/R-4.2.2/bin/R'
-cd $HOME
-R
-# Load libraries
-source("analysis/input.R")
-
-
-rm $HOME/output/log/*
-singularity run -B $HOME:$HOME -B $GWA:$GWA docker://tabeaschoeler/r-env R
-
 
 # ======== EXTRACT PHENOTYPE DATA =============
 hours="4"; task="extractPheno"; array="1" #=> DONE
