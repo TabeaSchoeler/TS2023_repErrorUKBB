@@ -7,7 +7,7 @@
 # Overview
 
 All analyses were performed in R. The complete analytical pipeline used to run the analyses is included in the script
-[analysis.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/litSearch.R).
+[analysis.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/litSearch.R).
 
 
 </br>
@@ -16,19 +16,22 @@ All analyses were performed in R. The complete analytical pipeline used to run t
 
 ### Extract and recode phenotype data
 
-- [extractPheno.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/extractPheno.R)
+- [extractPheno.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/extractPheno.R)
 
 
 ### Process phenotype data
 
-- [processPheno.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/processPheno.R)
+- [processPheno.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/processPheno.R)
 - Script to prepare repeated measure data
 - Generates the reporting error scores
 
 
 ### Perform principal component analysis on the reporting error scores
-- [pca.R](https://github.com/TabeaSchoeler/TS2023_MetaCAPS/blob/main/analysis/pca.R)
+- [pca.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/pca.R)
 - 
+
+### Compare predictors for participation and reporting error
+- [comparePB.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/comparePB.R)
 
 
 ```
