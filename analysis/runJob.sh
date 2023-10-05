@@ -36,10 +36,6 @@ fi
 
 
 if [ $task == "gwaS1" ]; then
-echo "run GWA in regenie"
-
-#rm $HOME/output/gwas/*
-
 echo $run
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK 
@@ -62,9 +58,6 @@ $myprog \
 --out ${HOME}/output/gwas/${run}_s1 \
 --threads $SLURM_CPUS_PER_TASK
 
-# --maxCatLevels: maximum number of levels for categorical covariates (for non-human studies) [default is 10]
-# increase=> otherwise error 
-
 echo "upload log file"
 cp $HOME/output/gwas/${run}_s1.log $HOME/output/log/
 rm $HOME/output/gwas/${run}_s1.log
@@ -79,14 +72,11 @@ echo "run GWA (step 2) in regenie"
 
 echo $run
 
-
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK 
 source /software/bin/mklvars.sh intel64
 myprog=/software/regenie-2.0.2/regenie
 
 a=${SLURM_ARRAY_TASK_ID}
-
-
 
 $myprog \
 --step 2 \
@@ -156,26 +146,12 @@ echo "run LD score regression"
 $HOME/programs/R-4.2.2/bin/R --no-save < $HOME/analysis/ldsc.R --args $HOME $task > $HOME/output/log/${task}_C.log  
 fi
 
-
-if [ $task == "weights" ]; then
-echo "run LD score regression munge"
-$HOME/programs/R-4.2.2/bin/R --no-save < $HOME/analysis/weights.R --args $HOME $task > $HOME/output/log/${task}_C.log  
-fi
-
-
-
 if [ $task == "runMR" ]; then
 echo "run MR"
 cd $HOME/analysis
-#singularity run -B $HOME:$HOME -B $GWA:$GWA docker://tabeaschoeler/r-env R $HOME/analysis/mr.R > $HOME/output/log/MR_C.log
 singularity run -B $HOME:$HOME -B $GWA:$GWA docker://tabeaschoeler/r-env Rscript $HOME/analysis/mr.R > $HOME/output/log/MR_C.log
 fi
 
-if [ $task == "het" ]; then
-echo "run heterogeneity test"
-cd $HOME/analysis
-singularity run -B $HOME:$HOME -B $GWA:$GWA docker://tabeaschoeler/r-env Rscript $HOME/analysis/het.R > $HOME/output/log/het_C.log
-fi
 
 if [ $task == "comparePB" ]; then
 echo "Lasso participation  // reporting error"
