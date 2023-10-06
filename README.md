@@ -29,7 +29,6 @@ The complete analytical pipeline used to run the analyses is included in the scr
 ### Perform principal component analysis on the reporting error scores
 
 - [pca.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/pca.R)
-- 
 
 ### Compare predictors for participation and reporting error
 
@@ -38,8 +37,8 @@ The complete analytical pipeline used to run the analyses is included in the scr
 
 ### Perform genome-wide scans using REGENIE
 
-- Perform on reporting error [specify `run=pca`
-- Perform on error-corrected phenotypes [specify `run=gwaCor`
+- Perform on reporting error [specify `run=pca`]
+- Perform on error-corrected phenotypes [specify `run=gwaCor`]
 - Process the results using [processREGENIE.R](https://github.com/TabeaSchoeler/TS2023_repErrorUKBB/blob/main/analysis/processREGENIE.R)
 
 
